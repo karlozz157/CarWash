@@ -29,7 +29,7 @@ class CarWashService
      * @param Car      $car
      * @param Customer $customer 
      *
-     * @return Job
+     * @return int $jobId
      */
     public function toWashCar(Car $car, Customer $customer)
     {
@@ -37,14 +37,15 @@ class CarWashService
         $job = new Job($car, $customer);
         $this->repository->put($job);
 
-        return $job;
+        return $job->getId();
     }
 
     /**
-     * @param Job $job
+     * @param int $jobId
      */
-    public function washCompleted(Job $job)
+    public function washCompleted($jobId)
     {
+        $job = $this->repository->findById($jobId);
         $this->notifier->notify($job);
     }
 }

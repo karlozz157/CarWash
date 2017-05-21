@@ -30,8 +30,8 @@ class ConsoleImplementation
             ->setColor($color);
 
         $carWashService = new CarWashService(new ConsoleNotifier(), new MemoryRepository());
-        $job = $carWashService->toWashCar($car, $customer);
-        $carWashService->washCompleted($job);
+        $jobId = $carWashService->toWashCar($car, $customer);
+        $carWashService->washCompleted($jobId);
     }
 
     /**
